@@ -1,0 +1,20 @@
+---
+interface Props {
+	couple: string;
+	image: string;
+	
+}
+
+const { couple, image } = Astro.props;
+
+---
+
+
+<section>
+    <div class="absolute  w-full text-center py-4">
+        <h1 class="font-cursive text-6xl text-white">Nos casamos</h1>
+        <h2 class="text-xl text-white font-bold tracking-widest uppercase"> {couple}</h2>
+    </div>
+  
+    <img src={image} alt="jpeg" class=" h-[450px] object-cover">
+</section>
