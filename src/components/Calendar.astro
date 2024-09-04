@@ -1,19 +1,54 @@
-<div class="flex text-white justify-between mt-4 w-[90%] mx-auto font-bold text-sm">
+---
+
+---
+<div id="counter" class="flex text-white justify-between mt-4 w-[90%] mx-auto font-bold text-sm">
     <div class="flex flex-col items-center w-20 ">
-      <span class="flex items-center justify-center bg-[#b5aa9d] rounded-full w-10 h-10 text-2xl mb-1">0</span>
+      <span id="days" class="flex items-center justify-center bg-[#b5aa9d] rounded-full w-12 h-12 text-2xl mb-1 pb-1"></span>
       <p class="text-[#5c573e] uppercase">Días</p>
     </div>
     <div class="flex flex-col items-center w-20 ">
-      <span class="flex items-center justify-center bg-[#b5aa9d] rounded-full w-10 h-10 text-2xl mb-1">0</span>
+      <span id="hours" class="flex items-center justify-center bg-[#b5aa9d] rounded-full w-12 h-12 text-2xl mb-1 pb-1"></span>
       <p class="text-[#5c573e] uppercase">Horas</p>
     </div>
     <div class="flex flex-col items-center w-20 ">
-      <span class="flex items-center justify-center bg-[#b5aa9d] rounded-full w-10 h-10 text-2xl mb-1">0</span>
+      <span id="minutes" class="flex items-center justify-center bg-[#b5aa9d] rounded-full w-12 h-12 text-2xl mb-1 pb-1"></span>
       <p class="text-[#5c573e] uppercase">Minutos</p>
     </div>
     <div class="flex flex-col items-center w-20 ">
-      <span class="flex items-center justify-center bg-[#b5aa9d] rounded-full w-10 h-10 text-2xl mb-1">0</span>
+      <span id="seconds" class="flex items-center justify-center bg-[#b5aa9d] rounded-full w-12 h-12 text-2xl mb-1 pb-1"></span>
       <p class="text-[#5c573e] uppercase">Segundos</p>
     </div>
   </div>
-  
+
+  <div id="message" class="hidden justify-center font-cursive text-[#74a57f] text-5xl py-4">Disfruten del día esperado</div>
+
+  <script>
+    const $days = document.getElementById('days'),
+    $hours = document.getElementById('hours'),
+    $minutes = document.getElementById('minutes'),
+    $seconds = document.getElementById('seconds'),
+    $finalMessage = document.getElementById('message'),
+    $counter = document.getElementById('counter')
+
+    //fecha a futuro
+    const countDownDate = new Date('Dec 20, 2025 00:00:00').getTime();
+    let interval = setInterval(()=>{
+      const now = new Date().getTime();
+      let distance = countDownDate - now;
+      let days = Math.floor(distance / (1000 *60*60*24))
+      let hours = Math.floor((distance % (1000 *60*60*24))/(1000 * 60 *60))
+      let minutes = Math.floor((distance % (1000 *60*60))/(1000 * 60))
+      let seconds = Math.floor((distance % (1000 *60))/(1000 ))
+      
+      $days.innerHTML = days;
+      $hours.innerHTML = hours;
+      $minutes.innerHTML = minutes;
+      $seconds.innerHTML = seconds;
+
+      if(distance < 1){
+        clearInterval(interval)
+        $finalMessage.style = "display:flex"
+        $counter.style = "display:none"
+      }
+    }, 1000)
+  </script>
